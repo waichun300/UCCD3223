@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">PracticalAssignment</string>
     <string name="welcome">Welcome to Math World</string>
+    <string name="compare">Compare Number</string>
+    <string name="greater">Which one is greater?</string>
+    <string name="asc_order">Ascending Order of number</string>
 </resources>

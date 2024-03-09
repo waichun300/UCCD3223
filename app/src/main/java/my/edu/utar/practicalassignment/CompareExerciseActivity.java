@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,21 +50,13 @@ public class CompareExerciseActivity extends AppCompatActivity {
         num1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (num1 > num2) {
-                    displayDialogBox("Correct. " + num1 +" is greater than " + num2);
-                } else {
-                    displayDialogBox("Incorrect. " + num1 +" is smaller than " + num2);
-                }
+                checkAnswer(num1, num2);
             }
         });
         num2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (num2 > num1) {
-                    displayDialogBox("Correct. " + num2 +" is greater than " + num1);
-                } else {
-                    displayDialogBox("Incorrect. " + num2 +" is smaller than " + num1);
-                }
+                checkAnswer(num2, num1);
             }
         });
     }
@@ -82,10 +75,39 @@ public class CompareExerciseActivity extends AppCompatActivity {
         num2Button.setText(question == 0 ? String.valueOf(num2) + " is greater" : String.valueOf(num2) + " is smaller");
     }
 
-    private void displayDialogBox(String message) {
+    private void checkAnswer(int selectedNum, int otherNum) {
+        String answer;
+        String message;
+        if(question == 0){
+            if (selectedNum > otherNum) {
+                answer = "Correct";
+                message =  selectedNum +" is greater than " + otherNum;
+            } else {
+                answer = "Wrong";
+                message = selectedNum +" is smaller than " + otherNum;
+            }
+        }else{
+            if (selectedNum < otherNum) {
+                answer = "Correct";
+                message = selectedNum +" is smaller than " + otherNum;
+            } else {
+                answer = "Wrong";
+                message =  selectedNum +" is greater than " + otherNum;
+            }
+        }
+        displayDialogBox(answer,message);
+    }
+
+    private void displayDialogBox(String answer,String message) {
+        ImageView image = new ImageView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Answer");
-        builder.setMessage(message);
+        builder.setTitle(answer);
+        if(answer.equals("Correct")){
+            builder.setIcon(R.drawable.correct);
+        }else if(answer.equals("Wrong")){
+            builder.setIcon(R.drawable.wrong);
+        }
+        builder.setMessage( message);
         builder.setCancelable(false);
         builder.setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
             @Override

@@ -13,7 +13,10 @@
         android:theme="@style/Theme.PracticalAssignment"
         tools:targetApi="31">
         <activity
-            android:name=".AscOrderActivity"
+            android:name=".ComposingExerciseActivity"
+            android:exported="true" />
+        <activity
+            android:name=".OrderingExerciseActivity"
             android:exported="true" />
         <activity
             android:name=".CompareExerciseActivity"

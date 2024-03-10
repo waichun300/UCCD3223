@@ -1,16 +1,11 @@
 package my.edu.utar.practicalassignment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button compareNumbersButton = findViewById(R.id.compareButton);
         Button orderingNumbersButton = findViewById(R.id.orderingButton);
+        Button composeNumbersButton = findViewById(R.id.composeButton);
         compareNumbersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +28,14 @@ public class MainActivity extends AppCompatActivity {
         orderingNumbersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AscOrderActivity.class);
+                Intent intent = new Intent(MainActivity.this, OrderingExerciseActivity.class);
+                startActivity(intent);
+            }
+        });
+        composeNumbersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ComposingExerciseActivity.class);
                 startActivity(intent);
             }
         });

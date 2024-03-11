@@ -48,7 +48,6 @@ public class OrderingExerciseActivity extends AppCompatActivity {
         checkAnswerButton = findViewById(R.id.checkAnswerButton);
 
         generateQuestion();
-
         generateNumbers();
 
         checkAnswerButton.setOnClickListener(new View.OnClickListener() {
@@ -102,21 +101,21 @@ public class OrderingExerciseActivity extends AppCompatActivity {
         num4TextView.setText(String.valueOf(num4));
         num5TextView.setText(String.valueOf(num5));
 
-        setNumberClickListener(num1TextView, num1);
-        setNumberClickListener(num2TextView, num2);
-        setNumberClickListener(num3TextView, num3);
-        setNumberClickListener(num4TextView, num4);
-        setNumberClickListener(num5TextView, num5);
+        setNumberTextViewClickListener(num1TextView, num1);
+        setNumberTextViewClickListener(num2TextView, num2);
+        setNumberTextViewClickListener(num3TextView, num3);
+        setNumberTextViewClickListener(num4TextView, num4);
+        setNumberTextViewClickListener(num5TextView, num5);
     }
 
-    private void setNumberClickListener(TextView textView, int number) {
+    private void setNumberTextViewClickListener(TextView textView, int number) {
         textView.setVisibility(View.VISIBLE);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 numbers[currentIndex] = number;
                 currentIndex++;
-                textView.setOnClickListener(null);
+                textView.setClickable(false);
                 textView.setVisibility(View.INVISIBLE);
                 updateAnswerTextView();
             }
@@ -175,11 +174,11 @@ public class OrderingExerciseActivity extends AppCompatActivity {
                     answerTextView.setText("");
                     numbers = new int[5];
                     currentIndex = 0;
-                    setNumberClickListener(num1TextView, num1);
-                    setNumberClickListener(num2TextView, num2);
-                    setNumberClickListener(num3TextView, num3);
-                    setNumberClickListener(num4TextView, num4);
-                    setNumberClickListener(num5TextView, num5);
+                    setNumberTextViewClickListener(num1TextView, num1);
+                    setNumberTextViewClickListener(num2TextView, num2);
+                    setNumberTextViewClickListener(num3TextView, num3);
+                    setNumberTextViewClickListener(num4TextView, num4);
+                    setNumberTextViewClickListener(num5TextView, num5);
                     checkAnswerButton.setEnabled(false);
                 }
             });

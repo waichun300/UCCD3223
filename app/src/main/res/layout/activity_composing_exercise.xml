@@ -123,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="28dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/concert_one"
                 android:text="Check Answer"
                 android:textSize="20sp" />
 
@@ -132,6 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="28dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/concert_one"
                 android:text="Reset Answer"
                 android:textSize="20sp" />
         </LinearLayout>

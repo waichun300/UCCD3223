@@ -57,9 +57,9 @@ public class ComposingExerciseActivity extends AppCompatActivity {
         checkAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(clickedButtons.isEmpty()){
+                if (clickedButtons.isEmpty()) {
                     statementTextView.setText("Select Two Numbers Before Check Answer");
-                }else{
+                } else {
                     boolean allCorrect = true;
                     for (Button button : clickedButtons) {
                         int number = Integer.parseInt(button.getText().toString());
@@ -69,9 +69,9 @@ public class ComposingExerciseActivity extends AppCompatActivity {
                         }
                     }
                     if (allCorrect) {
-                        displayDialogBox("Correct");
+                        displayDialogBox("Correct", clickedButtons.get(0).getText() + " and " + clickedButtons.get(1).getText() + " can be composed into " + question);
                     } else {
-                        displayDialogBox("Wrong");
+                        displayDialogBox("Wrong",clickedButtons.get(0).getText() + " and " + clickedButtons.get(1).getText() + " cannot be composed into " + question);
                     }
                 }
             }
@@ -121,12 +121,15 @@ public class ComposingExerciseActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (clickedButtons.size() < 2) {
+                if (clickedButtons.contains(button)) {
+                    clickedButtons.remove(button);
+                    button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF69B4")));
+                    updateOtherButtonStatus(View.VISIBLE);
+                } else if (clickedButtons.size() < 2) {
                     clickedButtons.add(button);
-                    button.setEnabled(false);
                     button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#A020F0")));
                     if (clickedButtons.size() == 2) {
-                        disableOtherButtons();
+                        updateOtherButtonStatus(View.INVISIBLE);
                     }
                 }
             }
@@ -138,19 +141,20 @@ public class ComposingExerciseActivity extends AppCompatActivity {
         for (Button button : buttons) {
             button.setEnabled(true);
             button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF69B4")));
+            button.setVisibility(View.VISIBLE);
         }
     }
 
-    private void disableOtherButtons() {
+    private void updateOtherButtonStatus(int status) {
         Button[] buttons = {button1, button2, button3, button4};
         for (Button button : buttons) {
             if (!clickedButtons.contains(button)) {
-                button.setEnabled(false);
+                button.setVisibility(status);
             }
         }
     }
 
-    private void displayDialogBox(String answer) {
+    private void displayDialogBox(String answer,String message) {
         ImageView image = new ImageView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if (answer.equals("Correct")) {
@@ -175,7 +179,17 @@ public class ComposingExerciseActivity extends AppCompatActivity {
                     enableAllButtons();
                 }
             });
+            builder.setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    clickedButtons.clear();
+                    generateQuestionAndStatement();
+                    generateNumbers();
+                    enableAllButtons();
+                }
+            });
         }
+        builder.setMessage(message);
         builder.setCancelable(false);
 
         AlertDialog alert = builder.create();

@@ -10,25 +10,33 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
 
 public class OrderingExerciseActivity extends AppCompatActivity {
-    private int[] numbers = new int[5];
-    private int currentIndex=0;
+    private ArrayList<Integer> clickedNumbersIndex = new ArrayList<>();
+
+    private ArrayList<Integer> clickedNumbers = new ArrayList<>();
     private int num1;
     private int num2;
     private int num3;
     private int num4;
     private int num5;
     private TextView questionTextView;
-    private TextView num1TextView;
-    private TextView num2TextView;
-    private TextView num3TextView;
-    private TextView num4TextView;
-    private TextView num5TextView;
-    private TextView answerTextView;
+    private Button num1Button;
+    private Button num2Button;
+    private Button num3Button;
+    private Button num4Button;
+    private Button num5Button;
+    private Button ans1Button;
+    private Button ans2Button;
+    private Button ans3Button;
+    private Button ans4Button;
+    private Button ans5Button;
     private Button checkAnswerButton;
+
+    private Button resetAnswerButton;
     private boolean isAscendingOrderQuestion;
     private boolean ascending;
     private boolean descending;
@@ -39,29 +47,53 @@ public class OrderingExerciseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ordering_exercise);
 
         questionTextView = findViewById(R.id.questionTextView);
-        num1TextView = findViewById(R.id.number1textView);
-        num2TextView = findViewById(R.id.number2textView);
-        num3TextView = findViewById(R.id.number3textView);
-        num4TextView = findViewById(R.id.number4textView);
-        num5TextView = findViewById(R.id.number5textView);
-        answerTextView = findViewById(R.id.answerTextView);
+        num1Button = findViewById(R.id.ordNum1Button);
+        num2Button = findViewById(R.id.ordNum2Button);
+        num3Button = findViewById(R.id.ordNum3Button);
+        num4Button = findViewById(R.id.ordNum4Button);
+        num5Button = findViewById(R.id.ordNum5Button);
+        ans1Button = findViewById(R.id.ansNum1Button);
+        ans2Button = findViewById(R.id.ansNum2Button);
+        ans3Button = findViewById(R.id.ansNum3Button);
+        ans4Button = findViewById(R.id.ansNum4Button);
+        ans5Button = findViewById(R.id.ansNum5Button);
         checkAnswerButton = findViewById(R.id.checkAnswerButton);
+        resetAnswerButton = findViewById(R.id.resetAnswerButton);
+
+        ans1Button.setEnabled(false);
+        ans2Button.setEnabled(false);
+        ans3Button.setEnabled(false);
+        ans4Button.setEnabled(false);
+        ans5Button.setEnabled(false);
+
+        checkAnswerButton.setEnabled(false);
 
         generateQuestion();
         generateNumbers();
+        setButtonClickListener(num1Button,0);
+        setButtonClickListener(num2Button,1);
+        setButtonClickListener(num3Button,2);
+        setButtonClickListener(num4Button,3);
+        setButtonClickListener(num5Button,4);
+
+        setAnswerButtonClickListener(ans1Button,0);
+        setAnswerButtonClickListener(ans2Button,1);
+        setAnswerButtonClickListener(ans3Button,2);
+        setAnswerButtonClickListener(ans4Button,3);
+        setAnswerButtonClickListener(ans5Button,4);
 
         checkAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isAscendingOrderQuestion){
-                    ascending = checkAscOrder(numbers);
+                    ascending = checkAscOrder(clickedNumbers);
                     if(ascending){
                         displayDialogBox("Correct","The numbers are in ascending order.");
                     } else{
                         displayDialogBox("Wrong","The numbers are not in ascending order.");
                     }
                 } else{
-                    descending = checkDescOrder(numbers);
+                    descending = checkDescOrder(clickedNumbers);
                     if(descending){
                         displayDialogBox("Correct","The numbers are in descending order.");
                     } else{
@@ -69,6 +101,13 @@ public class OrderingExerciseActivity extends AppCompatActivity {
                     }
                 }
 
+            }
+        });
+
+        resetAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reset();
             }
         });
     }
@@ -95,53 +134,130 @@ public class OrderingExerciseActivity extends AppCompatActivity {
         num4 = randomNumber[3];
         num5 = randomNumber[4];
 
-        num1TextView.setText(String.valueOf(num1));
-        num2TextView.setText(String.valueOf(num2));
-        num3TextView.setText(String.valueOf(num3));
-        num4TextView.setText(String.valueOf(num4));
-        num5TextView.setText(String.valueOf(num5));
-
-        setNumberTextViewClickListener(num1TextView, num1);
-        setNumberTextViewClickListener(num2TextView, num2);
-        setNumberTextViewClickListener(num3TextView, num3);
-        setNumberTextViewClickListener(num4TextView, num4);
-        setNumberTextViewClickListener(num5TextView, num5);
+        num1Button.setText(String.valueOf(num1));
+        num2Button.setText(String.valueOf(num2));
+        num3Button.setText(String.valueOf(num3));
+        num4Button.setText(String.valueOf(num4));
+        num5Button.setText(String.valueOf(num5));
     }
 
-    private void setNumberTextViewClickListener(TextView textView, int number) {
-        textView.setVisibility(View.VISIBLE);
-        textView.setOnClickListener(new View.OnClickListener() {
+    private void setButtonClickListener(Button button, int currentIndex) {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numbers[currentIndex] = number;
-                currentIndex++;
-                textView.setClickable(false);
-                textView.setVisibility(View.INVISIBLE);
-                updateAnswerTextView();
+                int num = Integer.parseInt(button.getText().toString());
+                button.setVisibility(View.INVISIBLE);
+                switch (clickedNumbersIndex.size()) {
+                    case 0:
+                        ans1Button.setEnabled(true);
+                        break;
+                    case 1:
+                        ans2Button.setEnabled(true);
+                        break;
+                    case 2:
+                        ans3Button.setEnabled(true);
+                        break;
+                    case 3:
+                        ans4Button.setEnabled(true);
+                        break;
+                    case 4:
+                        ans5Button.setEnabled(true);
+                        checkAnswerButton.setEnabled(true);
+                        break;
+                }
+                clickedNumbersIndex.add(currentIndex);
+                clickedNumbers.add(num);
+                updateAnswerButtonsText();
             }
         });
     }
-    private void updateAnswerTextView() {
-        StringBuilder answerText = new StringBuilder();
-        for (int i = 0; i < currentIndex; i++) {
-                answerText.append(numbers[i]).append(" ");
-        }
-        answerTextView.setText(answerText.toString().trim());
-        checkAnswerButton.setEnabled(currentIndex == 5);
-    }
 
-    private boolean checkAscOrder(int[] num){
-        for (int i = 0; i < num.length - 1; i++) {
-            if (num[i] > num[i + 1]) {
+    private void setAnswerButtonClickListener(Button button, int currentIndex) {
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int numIndex = clickedNumbersIndex.get(currentIndex);
+                clickedNumbers.remove(currentIndex);
+                clickedNumbersIndex.remove(currentIndex);
+                updateAnswerButtonsText();
+
+                switch (clickedNumbersIndex.size()) {
+                    case 0:
+                        ans1Button.setEnabled(false);
+                        break;
+                    case 1:
+                        ans2Button.setEnabled(false);
+                        break;
+                    case 2:
+                        ans3Button.setEnabled(false);
+                        break;
+                    case 3:
+                        ans4Button.setEnabled(false);
+                        break;
+                    case 4:
+                        ans5Button.setEnabled(false);
+                        checkAnswerButton.setEnabled(false);
+                        break;
+                }
+
+                switch (numIndex) {
+                    case 0:
+                        num1Button.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        num2Button.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        num3Button.setVisibility(View.VISIBLE);
+                        break;
+                    case 3:
+                        num4Button.setVisibility(View.VISIBLE);
+                        break;
+                    case 4:
+                        num5Button.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+        });
+    }
+    private void updateAnswerButtonsText() {
+        ans1Button.setText("");
+        ans2Button.setText("");
+        ans3Button.setText("");
+        ans4Button.setText("");
+        ans5Button.setText("");
+
+        for (int i = 0; i < clickedNumbers.size(); i++) {
+            switch (i) {
+                case 0:
+                    ans1Button.setText(String.valueOf(clickedNumbers.get(i)));
+                    break;
+                case 1:
+                    ans2Button.setText(String.valueOf(clickedNumbers.get(i)));
+                    break;
+                case 2:
+                    ans3Button.setText(String.valueOf(clickedNumbers.get(i)));
+                    break;
+                case 3:
+                    ans4Button.setText(String.valueOf(clickedNumbers.get(i)));
+                    break;
+                case 4:
+                    ans5Button.setText(String.valueOf(clickedNumbers.get(i)));
+                    break;
+            }
+        }
+    }
+    private boolean checkAscOrder(ArrayList<Integer> answer){
+        for (int i = 0; i < answer.size() - 1; i++) {
+            if (answer.get(i) > answer.get(i + 1)) {
                 return false;
             }
         }
         return true;
     }
-
-    private boolean checkDescOrder(int[] num) {
-        for (int i = 0; i < num.length - 1; i++) {
-            if (num[i] < num[i + 1]) {
+    private boolean checkDescOrder(ArrayList<Integer> answer) {
+        for (int i = 0; i < answer.size() - 1; i++) {
+            if (answer.get(i) < answer.get(i + 1)) {
                 return false;
             }
         }
@@ -157,12 +273,7 @@ public class OrderingExerciseActivity extends AppCompatActivity {
             builder.setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    answerTextView.setText("");
-                    numbers = new int[5];
-                    currentIndex = 0;
-                    generateQuestion();
-                    generateNumbers();
-                    checkAnswerButton.setEnabled(false);
+                    nextQuestion();
                 }
             });
         }else if(answer.equals("Wrong")){
@@ -171,15 +282,13 @@ public class OrderingExerciseActivity extends AppCompatActivity {
             builder.setNegativeButton("Try Again", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    answerTextView.setText("");
-                    numbers = new int[5];
-                    currentIndex = 0;
-                    setNumberTextViewClickListener(num1TextView, num1);
-                    setNumberTextViewClickListener(num2TextView, num2);
-                    setNumberTextViewClickListener(num3TextView, num3);
-                    setNumberTextViewClickListener(num4TextView, num4);
-                    setNumberTextViewClickListener(num5TextView, num5);
-                    checkAnswerButton.setEnabled(false);
+                    reset();
+                }
+            });
+            builder.setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    nextQuestion();
                 }
             });
         }
@@ -190,4 +299,39 @@ public class OrderingExerciseActivity extends AppCompatActivity {
         alert.show();
     }
 
+    private void nextQuestion(){
+        generateQuestion();
+        generateNumbers();
+        clickedNumbers.clear();
+        clickedNumbersIndex.clear();
+        updateAnswerButtonsText();
+        num1Button.setVisibility(View.VISIBLE);
+        num2Button.setVisibility(View.VISIBLE);
+        num3Button.setVisibility(View.VISIBLE);
+        num4Button.setVisibility(View.VISIBLE);
+        num5Button.setVisibility(View.VISIBLE);
+        ans1Button.setEnabled(false);
+        ans2Button.setEnabled(false);
+        ans3Button.setEnabled(false);
+        ans4Button.setEnabled(false);
+        ans5Button.setEnabled(false);
+        checkAnswerButton.setEnabled(false);
+    }
+
+    private void reset(){
+        clickedNumbers.clear();
+        clickedNumbersIndex.clear();
+        updateAnswerButtonsText();
+        num1Button.setVisibility(View.VISIBLE);
+        num2Button.setVisibility(View.VISIBLE);
+        num3Button.setVisibility(View.VISIBLE);
+        num4Button.setVisibility(View.VISIBLE);
+        num5Button.setVisibility(View.VISIBLE);
+        ans1Button.setEnabled(false);
+        ans2Button.setEnabled(false);
+        ans3Button.setEnabled(false);
+        ans4Button.setEnabled(false);
+        ans5Button.setEnabled(false);
+        checkAnswerButton.setEnabled(false);
+    }
 }

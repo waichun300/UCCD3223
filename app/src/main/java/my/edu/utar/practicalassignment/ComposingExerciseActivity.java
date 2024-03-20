@@ -99,15 +99,15 @@ public class ComposingExerciseActivity extends AppCompatActivity {
 
     private void generateNumbers() {
         Random random = new Random();
-        //Generate 2 numbers which can compose into the question
+        //Generate 2 numbers which can compose into the question(number)
         num1 = random.nextInt(question);
         num2 = question - num1;
 
-        // Generate two randoms numbers for num3 and num4 which cannot compose into question
+        //Generate two randoms numbers for num3 and num4 which cannot compose into question(number)
         do {
             num3 = random.nextInt(1000);
             num4 = random.nextInt(1000);
-        } while (num3 + num4 == question || num3 == num1 || num3 == num2 || num3 == num4 || num4 == num1 || num4 == num2);
+        } while (num3 + num4 == question || num3 == num1 || num3 == num2 || num3 == num4 || num4 == num1 || num4 == num2 || num3 > question || num4 > question);
 
         // Shuffle the numbers and random put into the button
         ArrayList<Integer> numberList = new ArrayList<>(Arrays.asList(num1, num2, num3, num4));

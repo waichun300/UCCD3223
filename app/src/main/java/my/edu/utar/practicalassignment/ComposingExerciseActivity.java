@@ -201,6 +201,7 @@ public class ComposingExerciseActivity extends AppCompatActivity {
             public void onClick(View view) {
                 alert.dismiss();
                 clickedButtons.clear();
+                checkAnswerButton.setEnabled(false);
                 generateQuestion();
                 generateNumbers();
                 enableAllButtons();
@@ -215,6 +216,7 @@ public class ComposingExerciseActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     alert.dismiss();
                     clickedButtons.clear();
+                    checkAnswerButton.setEnabled(false);
                     enableAllButtons();
                 }
             });

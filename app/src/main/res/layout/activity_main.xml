@@ -35,50 +35,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/concert_one"
-            android:text="@string/welcome"
+            android:text="Welcome to Math World"
             android:textAlignment="center"
             android:textColor="#FF5722"
-            android:textSize="40sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/compareButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="90dp"
             android:layout_marginRight="90dp"
-            android:backgroundTint="#FF9800"
+            android:backgroundTint="#FF69B4"
             android:fontFamily="@font/concert_one"
-            android:text="Compare numbers"
+            android:text="Compare"
             android:textColor="#FFFFFF"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
 
         <Button
             android:id="@+id/orderingButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="90dp"
-            android:backgroundTint="#FF9800"
+            android:layout_marginEnd="90dp"
+            android:layout_marginRight="100dp"
+            android:backgroundTint="#A020F0"
             android:fontFamily="@font/concert_one"
-            android:text="Ordering of numbers"
+            android:text="Ordering"
             android:textColor="#FFFFFF"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
 
         <Button
             android:id="@+id/composeButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="90dp"
+            android:layout_marginStart="110dp"
             android:layout_marginTop="16dp"
-            android:layout_marginRight="90dp"
+            android:layout_marginEnd="90dp"
             android:backgroundTint="#FF9800"
             android:fontFamily="@font/concert_one"
-            android:text="Composing numbers"
+            android:text="Composing"
             android:textColor="#FFFFFF"
-            android:textSize="30sp" />
+            android:textSize="28sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

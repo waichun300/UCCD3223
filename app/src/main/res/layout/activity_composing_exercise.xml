@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/concert_one"
-            android:text="@string/composing"
+            android:text="Compose"
             android:textAlignment="center"
             android:textColor="#FF5722"
             android:textSize="40sp" />
@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/concert_one"
+            android:text="Select two numbers to compose"
             android:textAlignment="center"
             android:textColor="#FF5722"
             android:textSize="30sp" />
@@ -123,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="28dp"
                 android:layout_weight="1"
+                android:backgroundTint="#FF9800"
                 android:fontFamily="@font/concert_one"
                 android:text="Check Answer"
                 android:textSize="20sp" />
@@ -133,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="28dp"
                 android:layout_weight="1"
+                android:backgroundTint="#FF9800"
                 android:fontFamily="@font/concert_one"
                 android:text="Reset Answer"
                 android:textSize="20sp" />

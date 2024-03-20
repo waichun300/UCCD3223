@@ -9,12 +9,13 @@
     tools:context=".OrderingExerciseActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="34dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="34dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/concert_one"
             android:textColor="#FF5722"
-            android:textSize="40sp"
+            android:textSize="34sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -41,38 +42,41 @@
             <Button
                 android:id="@+id/ordNum1Button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FF69B4"
                 android:fontFamily="@font/concert_one"
                 android:textAlignment="center"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/ordNum2Button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FF69B4"
                 android:fontFamily="@font/concert_one"
                 android:textAlignment="center"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/ordNum3Button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FF69B4"
                 android:fontFamily="@font/concert_one"
                 android:textAlignment="center"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
         </LinearLayout>
 
@@ -85,24 +89,26 @@
             <Button
                 android:id="@+id/ordNum4Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="39dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FF69B4"
                 android:fontFamily="@font/concert_one"
                 android:textAlignment="center"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/ordNum5Button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="38dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:backgroundTint="#FF69B4"
                 android:fontFamily="@font/concert_one"
                 android:textAlignment="center"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
         </LinearLayout>
 
         <TextView
@@ -110,9 +116,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/concert_one"
-            android:text="@string/answer"
+            android:text="Your Answer:"
             android:textColor="#FF5722"
-            android:textSize="34sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -127,9 +133,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="#FF69B4"
+                android:backgroundTint="#A020F0"
                 android:fontFamily="@font/concert_one"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/ansNum2Button"
@@ -137,9 +143,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="#FF69B4"
+                android:backgroundTint="#A020F0"
                 android:fontFamily="@font/concert_one"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/ansNum3Button"
@@ -147,9 +153,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:backgroundTint="#FF69B4"
+                android:backgroundTint="#A020F0"
                 android:fontFamily="@font/concert_one"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -164,9 +170,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="39dp"
                 android:layout_weight="1"
-                android:backgroundTint="#FF69B4"
+                android:backgroundTint="#A020F0"
                 android:fontFamily="@font/concert_one"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
             <Button
                 android:id="@+id/ansNum5Button"
@@ -174,9 +180,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="39dp"
                 android:layout_weight="1"
-                android:backgroundTint="#FF69B4"
+                android:backgroundTint="#A020F0"
                 android:fontFamily="@font/concert_one"
-                android:textSize="34sp" />
+                android:textSize="28sp" />
 
         </LinearLayout>
 
@@ -192,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="28dp"
                 android:layout_weight="1"
+                android:backgroundTint="#FF9800"
                 android:fontFamily="@font/concert_one"
                 android:text="Check Answer"
                 android:textSize="20sp" />
@@ -202,9 +209,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="28dp"
                 android:layout_weight="1"
+                android:backgroundTint="#FF9800"
                 android:fontFamily="@font/concert_one"
                 android:text="Reset Answer"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
     </LinearLayout>

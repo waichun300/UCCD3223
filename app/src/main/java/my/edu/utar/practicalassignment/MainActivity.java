@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
         Button compareNumbersButton = findViewById(R.id.compareButton);
         Button orderingNumbersButton = findViewById(R.id.orderingButton);
         Button composeNumbersButton = findViewById(R.id.composeButton);
+
+        //redirect to compare exercise screen
         compareNumbersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        //redirect to ordering exercise screen
         orderingNumbersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //redirect to compose exercise screen
         composeNumbersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

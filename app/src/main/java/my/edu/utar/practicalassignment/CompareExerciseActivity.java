@@ -1,20 +1,14 @@
 package my.edu.utar.practicalassignment;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Random;
 
@@ -51,12 +45,15 @@ public class CompareExerciseActivity extends AppCompatActivity {
         });
     }
 
+    //Generate question
     private void generateQuestion(){
         Random random = new Random();
         isGreaterThanQuestion = random.nextBoolean();
+        //TRUE - isGreaterQuestion //FALSE - isSmallerQuestion
         questionTextView.setText(isGreaterThanQuestion ? "Which one is greater?" : "Which one is smaller?");
     }
 
+    //Generate random two numbers for the users
     private void generateNumbers(){
         Random random = new Random();
         do {
@@ -68,50 +65,54 @@ public class CompareExerciseActivity extends AppCompatActivity {
         num2Button.setText(String.valueOf(num2));
     }
 
+    //Check the correct answer by compare user select number with other number
     private void checkAnswer(int selectedNum, int otherNum) {
-        String answer;
-        String message;
-        if(isGreaterThanQuestion){
-            if (selectedNum > otherNum) {
-                answer = "Correct";
-                message =  selectedNum +" is greater than " + otherNum;
-            } else {
-                answer = "Wrong";
-                message = selectedNum +" is smaller than " + otherNum;
-            }
-        }else{
-            if (selectedNum < otherNum) {
-                answer = "Correct";
-                message = selectedNum +" is smaller than " + otherNum;
-            } else {
-                answer = "Wrong";
-                message =  selectedNum +" is greater than " + otherNum;
-            }
+        boolean isCorrect;
+        String comparison;
+        if (isGreaterThanQuestion) {
+            isCorrect = selectedNum > otherNum;
+            comparison = "greater than";
+        } else {
+            isCorrect = selectedNum < otherNum;
+            comparison = "smaller than";
         }
-        displayDialogBox(answer,message);
+        String message = selectedNum + " is " + (isCorrect ? "" : "not ") + comparison + " " + otherNum;
+        String answer = isCorrect ? "Correct" : "Wrong";
+        displayDialogBox(answer, message);
     }
 
-    private void displayDialogBox(String answer,String message) {
-        ImageView image = new ImageView(this);
+    //Display the dialog box to show user the answer is correct or not
+    private void displayDialogBox(String answer, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.alert_dialog, null);
+
+        ImageView img = dialogView.findViewById(R.id.alertImage);
+        TextView alertMessage = dialogView.findViewById(R.id.alertMessage);
+        Button nextButton = dialogView.findViewById(R.id.nextButton);
+        Button tryAgainButton = dialogView.findViewById(R.id.tryAgainButton);
+        tryAgainButton.setVisibility(View.INVISIBLE);
+
         if(answer.equals("Correct")){
-            builder.setTitle("You are correct!");
-            builder.setIcon(R.drawable.correct);
-        }else if(answer.equals("Wrong")){
-            builder.setTitle("You are wrong!");
-            builder.setIcon(R.drawable.wrong);
+            img.setImageResource(R.drawable.correct);
+        }else if (answer.equals("Wrong")) {
+            img.setImageResource(R.drawable.wrong);
         }
-        builder.setMessage(message);
-        builder.setCancelable(false);
-        builder.setPositiveButton("Next Question", new DialogInterface.OnClickListener() {
+
+        builder.setTitle("Answer:")
+                .setView(dialogView)
+                .setCancelable(false);
+        AlertDialog alert = builder.create();
+        alert.show();
+
+        alertMessage.setText(message);
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View view) {
+                alert.dismiss();
                 generateQuestion();
                 generateNumbers();
             }
         });
-
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 }

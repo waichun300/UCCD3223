@@ -8,10 +8,9 @@
     android:background="#F5F5F5"
     tools:context=".CompareExerciseActivity">
 
-
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="384dp"
+        android:layout_height="421dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
@@ -28,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/concert_one"
-            android:text="@string/compare"
+            android:text="Compare"
             android:textAlignment="center"
             android:textColor="#FF5722"
             android:textSize="48sp" />
@@ -41,7 +40,7 @@
             android:fontFamily="@font/concert_one"
             android:textAlignment="center"
             android:textColor="#FF5722"
-            android:textSize="40sp" />
+            android:textSize="36sp" />
 
         <Button
             android:id="@+id/number1button"
@@ -52,7 +51,7 @@
             android:fontFamily="@font/concert_one"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:textSize="34sp" />
 
         <Button
             android:id="@+id/number2button"
@@ -63,7 +62,7 @@
             android:fontFamily="@font/concert_one"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="40sp" />
+            android:textSize="34sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

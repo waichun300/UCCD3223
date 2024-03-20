@@ -86,6 +86,7 @@ public class ComposingExerciseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 clickedButtons.clear();
+                checkAnswerButton.setEnabled(false);
                 enableAllButtons();
             }
         });
@@ -133,6 +134,7 @@ public class ComposingExerciseActivity extends AppCompatActivity {
                 if (clickedButtons.contains(button)) {
                     clickedButtons.remove(button);
                     button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF69B4")));
+                    checkAnswerButton.setEnabled(false);
                     updateOtherButtonStatus(View.VISIBLE);
                 } else if (clickedButtons.size() < 2) {
                     clickedButtons.add(button);
